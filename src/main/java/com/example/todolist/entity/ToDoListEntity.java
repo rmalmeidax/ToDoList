@@ -36,7 +36,7 @@ public class ToDoListEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String tarefas;
+	
 	
 	@Column(columnDefinition = "TEXT")
 	private String tarefa;
