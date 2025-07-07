@@ -1,78 +1,76 @@
-📝 ToDoList API
-API REST para gerenciamento de tarefas pessoais, construída com Spring Boot.
+# ToDoList - API com Autenticação JWT
 
-✅ Funcionalidades
-Criar tarefas
+Este é um projeto de API REST para gerenciar uma lista de tarefas (**ToDoList**), desenvolvido em **Java com Spring Boot**.
 
-Listar todas as tarefas
+---
 
-Buscar tarefa por ID
+## ✅ Funcionalidades
 
-Filtrar tarefas por status
+- Cadastro de usuários (**nome**, **email** e **senha**);
+- Autenticação de usuários (**login**) com geração de token **JWT**;
+- Acesso a rotas protegidas mediante envio do token JWT no Header;
+- Cadastro, listagem e manipulação de tarefas (**ToDoList**) em rotas protegidas.
 
-Excluir tarefas
+---
 
-🔧 Tecnologias
-Java 17+
+## ✅ Tecnologias Utilizadas
 
-Spring Boot
+- Java 17+
+- Spring Boot
+- Spring Security
+- JWT (JSON Web Token)
+- H2 Database (banco de dados em memória para testes)
+- Maven
 
-Spring Data JPA
+---
 
-H2 (banco em memória)
+## ✅ Como Executar o Projeto
 
-ModelMapper (conversão DTO ↔ Entidade)
+1. Clone este repositório ou extraia o ZIP.
+2. Importe no seu IDE preferido (Eclipse, IntelliJ, VS Code).
+3. Execute a aplicação na classe principal (`@SpringBootApplication`).
+4. Acesse o **H2 Console** (caso deseje):
+   - URL: `http://localhost:8080/h2-console`
+   - JDBC URL: `jdbc:h2:mem:testdb`
+   - Usuário: `sa`
+   - Senha: *(vazia)*
+5. Teste as rotas usando **Postman** ou outro cliente HTTP.
 
-Maven
+---
 
-📦 Instalação
-bash
-Copiar
-Editar
-git clone https://github.com/seu-usuario/ToDoList.git
-cd ToDoList
-./mvnw spring-boot:run
-📁 Estrutura de Pacotes
-controller: Camada de controle (REST API)
+## ✅ Principais Endpoints
 
-service: Regras de negócio
+| Método | Rota             | Descrição                          |
+|--------|------------------|-----------------------------------|
+| POST   | `/usuarios`      | Cadastrar novo usuário             |
+| POST   | `/auth/login`    | Autenticar e obter token JWT       |
+| GET/POST/PUT/DELETE | `/todolist` | Rotas protegidas (JWT obrigatório) |
 
-repository: Interface com o banco de dados
+---
 
-dto: Objetos de transferência de dados
+## ✅ Exemplo de Login
 
-entity: Entidades JPA
-
-enums: Enums para status, categoria, prioridade
-
-🔄 Exemplo de Requisição JSON
-Criar nova tarefa (POST /todolist)
-json
-Copiar
-Editar
+### Requisição (JSON):
+```json
 {
-  "data": "05/07/2025",
-  "categoria": "TRABALHO",
-  "prioridade": "ALTA",
-  "status": "PENDENTE"
+  "email": "seuemail@exemplo.com",
+  "senha": "suasenha"
 }
-Retorno:
-json
-Copiar
-Editar
+## ✅ Resposta (JSON):
+
 {
-  "id": 1,
-  "data": "05/07/2025",
-  "categoria": "TRABALHO",
-  "prioridade": "ALTA",
-  "status": "PENDENTE"
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6..."
 }
-📊 StatusEnums disponíveis:
-PENDENTE
 
-EM_ANDAMENTO
+✅ Como Utilizar o Token JWT nas Rotas Protegidas
+Após o login, copie o token JWT recebido e envie no Header Authorization de cada requisição protegida:
 
-CONCLUIDO
+Authorization: Bearer SEU_TOKEN_AQUI
 
-📫 Contato
-Desenvolvido por Rafael Maranduba.
+✅ Observação Importante
+
+A lógica de autenticação JWT foi implementada com ajuda da GPT (ChatGPT), conforme solicitado pelo autor deste projeto.
+
+✅ Licença
+
+Este projeto foi desenvolvido para fins de estudo e prática.
